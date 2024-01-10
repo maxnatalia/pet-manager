@@ -13,7 +13,9 @@ export const GlobalStyle = createGlobalStyle`
         font-family: 'Ubuntu', sans-serif;
         font-size: 18px;
         letter-spacing: 1.6px;
-        color: red;
+        color: ${({ theme }) => theme.color.textPrimary};
+        background: ${({ theme }) => theme.color.backgroundBody};
         overflow-x: hidden;
+        transition: all 0.5s ease-out;
     }
 `;
