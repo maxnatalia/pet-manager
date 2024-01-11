@@ -16,11 +16,15 @@ export const TextTheme = styled.span`
   font-size: 16px;
   font-weight: 500;
   letter-spacing: 2px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoint.tablet}px) {
+    display: none;
+  }
 `;
 
 export const Box = styled.div`
-  width: 80px;
-  height: 40px;
+  width: 60px;
+  height: 30px;
   border-radius: 20px;
   background-color: ${({ theme }) => theme.color.background};
   border: 2px solid ${({ theme }) => theme.color.textPrimary};
@@ -33,17 +37,17 @@ export const Box = styled.div`
 
 export const LightIcon = styled(FaSun)`
   color: yellow;
-  font-size: 18px;
+  font-size: 16px;
 `;
 
 export const DarkIcon = styled(FaMoon)`
   color: gray;
-  font-size: 18px;
+  font-size: 16px;
 `;
 
 export const PointerIcon = styled(FaPaw)<PointerIconProps>`
   color: ${({ theme }) => theme.color.background};
-  font-size: 48px;
+  font-size: 36px;
   padding: 6px;
   background-color: ${({ theme }) => theme.color.backgroundPrimary};
   border: 2px solid ${({ theme }) => theme.color.textPrimary};
@@ -56,6 +60,6 @@ export const PointerIcon = styled(FaPaw)<PointerIconProps>`
   ${({ $moveToRight }) =>
     $moveToRight &&
     css`
-      transform: translateX(40px);
+      transform: translateX(30px);
     `}
 `;
