@@ -17,5 +17,9 @@ export const GlobalStyle = createGlobalStyle`
         background: ${({ theme }) => theme.color.backgroundBody};
         overflow-x: hidden;
         transition: all 0.5s ease-out;
+
+        @media (max-width: ${({ theme }) => theme.breakpoint.mobile}px) {
+            font-size: 16px;
+        }
     }
 `;
