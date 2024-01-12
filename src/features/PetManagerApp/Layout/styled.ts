@@ -9,11 +9,21 @@ export const Container = styled.div`
   box-shadow: 0px 16px 58px 0px rgba(9, 10, 51, 0.03),
     0px -2px 50px 0px rgba(9, 10, 51, 0.02);
   display: grid;
-  grid-template-columns: max-content 1fr 1fr;
+  grid-template-columns: max-content 1fr;
   grid-template-areas:
-    "header header header"
-    "nav main main"
-    "footer footer footer";
+    "header header"
+    "nav main"
+    "footer footer";
+
+  @media (max-width: ${({ theme }) => theme.breakpoint.tablet}px) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header "
+      "nav"
+      "main"
+      "footer";
+    grid-gap: 20px;
+  }
 `;
 
 export const Main = styled.main`
