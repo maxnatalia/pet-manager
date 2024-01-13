@@ -1,4 +1,4 @@
-import { dynamicYear, email, socialMedia } from "./socialMedia";
+import { dynamicYear, email, socialMedia } from "./footerData";
 import { StyledFooter, ContactBox, Mail, Author } from "./styled";
 
 const Footer = () => {
