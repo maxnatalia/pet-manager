@@ -3,6 +3,7 @@ import Layout from "./Layout";
 import Home from "./Home";
 import Form from "./Form";
 import Pets from "./Pets";
+import SinglePet from "./SinglePet";
 
 const PetManagerApp = () => {
   return (
@@ -12,6 +13,7 @@ const PetManagerApp = () => {
           <Route index element={<Home />} />
           <Route path="/form" element={<Form />} />
           <Route path="/pets" element={<Pets />} />
+          <Route path="/pet/:id" element={<SinglePet />} />
         </Route>
       </Routes>
     </BrowserRouter>
