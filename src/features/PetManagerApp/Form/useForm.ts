@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { nanoid } from "nanoid";
-import usePetsContext from "../Pets/usePetsContext";
+import usePetsContext from "../usePetsContext";
 
 const initialState = {
   petName: "",

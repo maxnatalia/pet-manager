@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import usePetsContext from "./usePetsContext";
+import usePetsContext from "../usePetsContext";
 
 const Pets = () => {
   const { petsList, handleRemovePet } = usePetsContext();

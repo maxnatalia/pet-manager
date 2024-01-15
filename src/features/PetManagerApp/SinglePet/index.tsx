@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import usePetsContext from "../Pets/usePetsContext";
+import usePetsContext from "../usePetsContext";
 
 const SinglePet = () => {
   const { id } = useParams();
