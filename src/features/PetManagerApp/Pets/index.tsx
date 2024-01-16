@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import usePetsContext from "../usePetsContext";
 
 const Pets = () => {
-  const { petsList, handleRemovePet } = usePetsContext();
+  const navigate = useNavigate();
+  const { petsList, handleRemovePet, handleEditPet } = usePetsContext();
 
   return (
     <div>
@@ -13,7 +14,14 @@ const Pets = () => {
             <h2>{pet.petName}</h2>
             <Link to={`/pet/${pet.id}`}>Go to single pet</Link>
             <button onClick={() => handleRemovePet(pet.id)}>REMOVE PET</button>
-            <button>EDIT PET</button>
+            <button
+              onClick={() => {
+                navigate("/form");
+                handleEditPet(pet.id);
+              }}
+            >
+              EDIT PET
+            </button>
           </div>
         ))}
       </div>
