@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { nanoid } from "nanoid";
 import usePetsContext from "../usePetsContext";
@@ -12,7 +12,16 @@ const useForm = () => {
   const [values, setValues] = useState(initialState);
   const [isTouched, setIsTouched] = useState(false);
   const [hasError, setHasError] = useState(false);
-  const { setPetsList } = usePetsContext();
+
+  const { setPetsList, petsList, getPetById, editableId, setEditableId } =
+    usePetsContext();
+
+  useEffect(() => {
+    if (editableId) {
+      const editablePet = getPetById(editableId);
+      editablePet && setValues(editablePet);
+    }
+  }, [editableId, getPetById]);
 
   const isValidValue = (value: string) => value.trim() !== "";
 
@@ -22,14 +31,26 @@ const useForm = () => {
 
     setValues({ ...values, [name]: value });
 
-    if (hasError) {
-      setHasError(false);
-    }
-    setIsTouched(true);
+    hasError ? setHasError(false) : setIsTouched(true);
   };
 
   const handleInputBlur = () => {
     setHasError(!isValidValue(values.petName));
+  };
+
+  const updatePet = () => {
+    if (editableId) {
+      const updatedPet = petsList.map(item =>
+        item.id === editableId
+          ? {
+              id: editableId,
+              ...values,
+            }
+          : item
+      );
+      setPetsList(updatedPet);
+      setEditableId("");
+    }
   };
 
   const addPet = () => {
@@ -43,11 +64,10 @@ const useForm = () => {
   const onFormSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    if (!isValidValue(values.petName)) {
-      setHasError(true);
-      return;
-    }
-    addPet();
+    if (!isValidValue(values.petName)) return setHasError(true);
+
+    editableId ? updatePet() : addPet();
+
     setValues(initialState);
     navigate("/pets");
   };
