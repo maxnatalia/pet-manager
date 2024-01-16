@@ -1,15 +1,18 @@
 import { ThemeProvider } from "styled-components";
-import { themeDark, themeLight } from "./theme";
 import { GlobalStyle } from "./GlobalStyle";
-import PetManagerApp from "../features/PetManagerApp";
+import { themeDark, themeLight } from "./theme";
 import useThemeContext from "../common/ThemeSwitcher/useThemeContext";
+import PetManagerApp from "../features/PetManagerApp";
+import { PetsProvider } from "../features/PetManagerApp/petsContext";
 
 const App = () => {
   const { isDarkTheme } = useThemeContext();
   return (
     <ThemeProvider theme={isDarkTheme ? themeDark : themeLight}>
       <GlobalStyle />
-      <PetManagerApp />
+      <PetsProvider>
+        <PetManagerApp />
+      </PetsProvider>
     </ThemeProvider>
   );
 };
