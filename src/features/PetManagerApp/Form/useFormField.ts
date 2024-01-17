@@ -1,7 +1,7 @@
 import { FormEvent, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { nanoid } from "nanoid";
-import { PetCategory, isNotEmpty } from "../utils";
+import { PetCategory, isDateOfBirthValid, isNotEmpty } from "../utils";
 import usePetsContext from "../usePetsContext";
 import useField from "./useField";
 
@@ -18,7 +18,7 @@ const useFormField = () => {
     inputBlurHandler: petNameBlurHandler,
     setEnteredValue: petNameSetValue,
     setIsTouched: petNameSetIsTouched,
-  } = useField(isNotEmpty);
+  } = useField({ validateValue: isNotEmpty });
 
   const {
     value: breed,
@@ -28,13 +28,35 @@ const useFormField = () => {
     inputBlurHandler: breedBlurHandler,
     setEnteredValue: breedSetValue,
     setIsTouched: breedSetIsTouched,
-  } = useField(isNotEmpty);
+  } = useField({ validateValue: isNotEmpty });
+
+  const {
+    value: dateOfBirth,
+    isValid: dateOfBirthIsValid,
+    hasError: dateOfBirthHasError,
+    valueChangeHandler: dateOfBirthChangedHandler,
+    inputBlurHandler: dateOfBirthBlurHandler,
+    setEnteredValue: dateOfBirthSetValue,
+    setIsTouched: dateOfBirthSetIsTouched,
+  } = useField({ validateValue: isDateOfBirthValid });
 
   const {
     value: category,
     valueChangeHandler: categoryChangedHandler,
     setEnteredValue: categorySetValue,
-  } = useField(undefined, "unspecified");
+  } = useField({ initialValue: "unspecified" });
+
+  const {
+    value: gender,
+    valueChangeHandler: genderChangedHandler,
+    setEnteredValue: genderSetValue,
+  } = useField({ initialValue: "unspecified" });
+
+  const {
+    value: description,
+    valueChangeHandler: descriptionChangedHandler,
+    setEnteredValue: descriptionSetValue,
+  } = useField();
 
   useEffect(() => {
     if (editableId) {
@@ -43,6 +65,9 @@ const useFormField = () => {
         petNameSetValue(editablePet.petName);
         breedSetValue(editablePet.breed);
         categorySetValue(editablePet.category);
+        genderSetValue(editablePet.gender);
+        descriptionSetValue(editablePet.description);
+        dateOfBirthSetValue(editablePet.dateOfBirth);
       }
     }
   }, [
@@ -51,9 +76,12 @@ const useFormField = () => {
     petNameSetValue,
     breedSetValue,
     categorySetValue,
+    genderSetValue,
+    descriptionSetValue,
+    dateOfBirthSetValue,
   ]);
 
-  const formIsValid = petNameIsValid && breedIsValid;
+  const formIsValid = petNameIsValid && breedIsValid && dateOfBirthIsValid;
 
   const addOrUpdatePet = () => {
     const updatedPetList = editableId
@@ -64,12 +92,23 @@ const useFormField = () => {
                 petName,
                 breed,
                 category: category as PetCategory,
+                gender,
+                description,
+                dateOfBirth,
               }
             : item
         )
       : [
           ...petsList,
-          { id: nanoid(), petName, breed, category: category as PetCategory },
+          {
+            id: nanoid(),
+            petName,
+            breed,
+            category: category as PetCategory,
+            gender,
+            description,
+            dateOfBirth,
+          },
         ];
 
     setPetsList(updatedPetList);
@@ -82,9 +121,9 @@ const useFormField = () => {
     if (!formIsValid) {
       petNameSetIsTouched(true);
       breedSetIsTouched(true);
+      dateOfBirthSetIsTouched(true);
       return;
     }
-
     console.log(petsList);
     addOrUpdatePet();
     navigate("/pets");
@@ -102,6 +141,14 @@ const useFormField = () => {
     breedHasError,
     category,
     categoryChangedHandler,
+    gender,
+    genderChangedHandler,
+    description,
+    descriptionChangedHandler,
+    dateOfBirth,
+    dateOfBirthBlurHandler,
+    dateOfBirthChangedHandler,
+    dateOfBirthHasError,
   };
 };
 
