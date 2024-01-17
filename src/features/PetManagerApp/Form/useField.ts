@@ -1,7 +1,12 @@
 import { useState, ChangeEvent } from "react";
 import { ValidationFunction } from "../utils";
 
-const useField = (validateValue?: ValidationFunction, initialValue = "") => {
+type UseFieldProps = {
+  validateValue?: ValidationFunction;
+  initialValue?: string;
+};
+
+const useField = ({ validateValue, initialValue = "" }: UseFieldProps = {}) => {
   const [enteredValue, setEnteredValue] = useState(initialValue);
   const [isTouched, setIsTouched] = useState(false);
 
@@ -9,7 +14,7 @@ const useField = (validateValue?: ValidationFunction, initialValue = "") => {
   const hasError = !valueIsValid && isTouched;
 
   const valueChangeHandler = (
-    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     setEnteredValue(e.target.value);
   };
