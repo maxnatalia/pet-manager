@@ -1,9 +1,16 @@
 import { createContext, useState } from "react";
 import { initialPetsList } from "./initialPetsList";
+import { EventType, PetCategory } from "./utils";
 
 export type Pet = {
   id: string;
   petName: string;
+  breed: string;
+  category: PetCategory;
+  gender: string;
+  description: string;
+  dateOfBirth: string;
+  events: EventType[];
 };
 
 type PetsContextType = {
