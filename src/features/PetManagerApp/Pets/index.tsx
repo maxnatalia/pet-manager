@@ -25,6 +25,22 @@ const Pets = () => {
           </div>
         ))}
       </div>
+
+      <div>
+        <h2>List of Events:</h2>
+        {petsList.map(pet => (
+          <div key={pet.id}>
+            <h3>{pet.petName}'s Events:</h3>
+            {pet.events.length === 0 && <p>No events!</p>}
+            {pet.events.map(event => (
+              <div key={event.id}>
+                {event.eventName} - {event.eventDate}
+                <button>Edit Event</button>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
