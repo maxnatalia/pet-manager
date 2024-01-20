@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
-import Home from "./Home";
-import Form from "./Form";
-import Pets from "./Pets";
-import SinglePet from "./SinglePet";
+import Home from "./pages/Home";
+import Form from "./pages/Form";
+import Pets from "./pages/Pets";
+import SinglePet from "./pages/SinglePet";
 
 const PetManagerApp = () => {
   return (
