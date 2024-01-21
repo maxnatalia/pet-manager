@@ -18,9 +18,12 @@ type PetsContextType = {
   setPetsList: React.Dispatch<React.SetStateAction<Pet[]>>;
   editableId: string;
   setEditableId: React.Dispatch<React.SetStateAction<string>>;
+  editableEventId: string;
+  setEditableEventId: React.Dispatch<React.SetStateAction<string>>;
   getPetById: (selectedPetId: string | undefined) => Pet | undefined;
   handleRemovePet: (id: string) => void;
   handleEditPet: (id: string) => void;
+  handleEditPetEvent: (petId: string, eventId: string) => void;
 };
 
 type PetsProviderProps = {
@@ -32,6 +35,7 @@ export const PetsContext = createContext<PetsContextType | null>(null);
 export const PetsProvider = ({ children }: PetsProviderProps) => {
   const [petsList, setPetsList] = useState<Pet[]>(initialPetsList);
   const [editableId, setEditableId] = useState("");
+  const [editableEventId, setEditableEventId] = useState("");
 
   const getPetById = (selectedPetId: string | undefined) =>
     petsList.find(pet => pet.id === selectedPetId);
@@ -44,6 +48,16 @@ export const PetsProvider = ({ children }: PetsProviderProps) => {
     setEditableId(id);
   };
 
+  const handleEditPetEvent = (petId: string, eventId: string) => {
+    const editableEvent = petsList
+      .find(pet => pet.id === petId)
+      ?.events.find(event => event.id === eventId);
+
+    if (editableEvent) {
+      setEditableEventId(eventId);
+    }
+  };
+
   return (
     <PetsContext.Provider
       value={{
@@ -54,6 +68,9 @@ export const PetsProvider = ({ children }: PetsProviderProps) => {
         handleEditPet,
         editableId,
         setEditableId,
+        editableEventId,
+        setEditableEventId,
+        handleEditPetEvent,
       }}
     >
       {children}
