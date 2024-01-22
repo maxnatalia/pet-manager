@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Form from "./pages/Form";
 import Pets from "./pages/Pets";
 import SinglePet from "./pages/SinglePet";
+import Events from "./pages/Events";
 
 const PetManagerApp = () => {
   return (
@@ -14,6 +15,7 @@ const PetManagerApp = () => {
           <Route path="/form" element={<Form />} />
           <Route path="/pets" element={<Pets />} />
           <Route path="/pet/:id" element={<SinglePet />} />
+          <Route path="/events" element={<Events />} />
         </Route>
       </Routes>
     </BrowserRouter>
