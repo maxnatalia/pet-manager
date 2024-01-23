@@ -1,6 +1,10 @@
+import { FaWpforms } from "react-icons/fa";
+import TitlePage from "../../../../common/TitlePage";
 import usePetsContext from "../../usePetsContext";
-import { petCategory } from "../../utils";
 import useFormField from "./useFormField";
+import AddicionalDataForm from "./AddicionalDataForm";
+import BasicDataForm from "./BasicDataForm";
+import { FormBox, SubmitButton } from "./styled";
 
 const Form = () => {
   const { editableId } = usePetsContext();
@@ -14,116 +18,54 @@ const Form = () => {
     breedBlurHandler,
     breedChangedHandler,
     breedHasError,
+    dateOfBirth,
+    dateOfBirthBlurHandler,
+    dateOfBirthChangedHandler,
+    dateOfBirthHasError,
     categoryChangedHandler,
     category,
     gender,
     genderChangedHandler,
     description,
     descriptionChangedHandler,
-    dateOfBirth,
-    dateOfBirthBlurHandler,
-    dateOfBirthChangedHandler,
-    dateOfBirthHasError,
   } = useFormField();
 
   return (
-    <div>
-      <h2>Form</h2>
-      <form onSubmit={onFormSubmit}>
-        <div>
-          <label>Pet name:*</label>
-          <input
-            type="text"
-            name="petName"
-            value={petName}
-            onChange={petNameChangedHandler}
-            onBlur={petNameBlurHandler}
-          />
-          {petNameHasError && <div>Error!</div>}
-        </div>
+    <>
+      <TitlePage
+        title="Form"
+        subtitle="Here you can add your new pet to the list"
+        icon={<FaWpforms />}
+      />
+      <FormBox onSubmit={onFormSubmit}>
+        <BasicDataForm
+          petName={petName}
+          petNameBlurHandler={petNameBlurHandler}
+          petNameChangedHandler={petNameChangedHandler}
+          petNameHasError={petNameHasError}
+          breed={breed}
+          breedBlurHandler={breedBlurHandler}
+          breedChangedHandler={breedChangedHandler}
+          breedHasError={breedHasError}
+          dateOfBirth={dateOfBirth}
+          dateOfBirthBlurHandler={dateOfBirthBlurHandler}
+          dateOfBirthChangedHandler={dateOfBirthChangedHandler}
+          dateOfBirthHasError={dateOfBirthHasError}
+        />
+        <AddicionalDataForm
+          categoryChangedHandler={categoryChangedHandler}
+          category={category}
+          gender={gender}
+          genderChangedHandler={genderChangedHandler}
+          description={description}
+          descriptionChangedHandler={descriptionChangedHandler}
+        />
 
-        <div>
-          <label>Pet breed:*</label>
-          <input
-            type="text"
-            name="breed"
-            value={breed}
-            onChange={breedChangedHandler}
-            onBlur={breedBlurHandler}
-          />
-          {breedHasError && <div>Error!</div>}
-        </div>
-
-        <div>
-          <label>Date of Birth:*</label>
-          <input
-            type="date"
-            name="dateOfBirth"
-            value={dateOfBirth}
-            onChange={dateOfBirthChangedHandler}
-            onBlur={dateOfBirthBlurHandler}
-          />
-          {dateOfBirthHasError && <div>Error!</div>}
-        </div>
-        <div>
-          <label>Pet category:</label>
-          <select onChange={categoryChangedHandler} value={category}>
-            {petCategory.map((category, index) => (
-              <option
-                key={`${index} - ${category.value}`}
-                value={category.value}
-              >
-                {category.label}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label>
-            <input
-              type="radio"
-              value="male"
-              name="gender"
-              checked={gender === "male"}
-              onChange={genderChangedHandler}
-            />
-            <span>MALE</span>
-          </label>
-          <label>
-            <input
-              type="radio"
-              value="female"
-              name="gender"
-              checked={gender === "female"}
-              onChange={genderChangedHandler}
-            />
-            <span>FEMALE</span>
-          </label>
-          <label>
-            <input
-              type="radio"
-              value="unspecified"
-              name="gender"
-              checked={gender === "unspecified"}
-              onChange={genderChangedHandler}
-            />
-            <span>UNSPECIFIED</span>
-          </label>
-        </div>
-
-        <div>
-          <label>Description:</label>
-          <textarea
-            name="description"
-            value={description}
-            onChange={descriptionChangedHandler}
-          />
-        </div>
-        <button type="submit">
+        <SubmitButton type="submit">
           {editableId ? "Save changes" : "Add new Pet"}
-        </button>
-      </form>
-    </div>
+        </SubmitButton>
+      </FormBox>
+    </>
   );
 };
 
