@@ -23,6 +23,7 @@ export const Container = styled.div`
       "main"
       "footer";
     grid-gap: 20px;
+    padding: 10px;
   }
 `;
 
