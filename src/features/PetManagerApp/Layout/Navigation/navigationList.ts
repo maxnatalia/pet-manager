@@ -1,5 +1,5 @@
 import { TbHome, TbPaw } from "react-icons/tb";
-import { MdAddCircle } from "react-icons/md";
+import { MdAddCircle, MdEvent } from "react-icons/md";
 import { styledIcon } from "./styled";
 
 export const navigationList = [
@@ -14,6 +14,12 @@ export const navigationList = [
     link: "/pets",
     title: "Go to pets list",
     Icon: styledIcon(TbPaw),
+  },
+  {
+    name: "Events",
+    link: "/events",
+    title: "Go to events list",
+    Icon: styledIcon(MdEvent),
   },
   {
     name: "Add Pet",
