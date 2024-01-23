@@ -1,19 +1,7 @@
-export type ValidationFunction = (value: string) => boolean;
-export type PetCategory =
-  | "unspecified"
-  | "dog"
-  | "cat"
-  | "rabbit"
-  | "parrot"
-  | "rodent";
+import { PetCategory } from "./types";
 
-export type EventType = {
-  id: string;
-  eventName: string;
-  eventDate: string;
-};
-
-export const isNotEmpty = (value: string): boolean => value.trim() !== "";
+export const isNotEmpty = (value: string): boolean =>
+  value.trim() !== "" && value.trim().length >= 3;
 
 export const isDateOfBirthValid = (dateOfBirth: string): boolean => {
   if (!isNotEmpty(dateOfBirth)) {
@@ -25,17 +13,6 @@ export const isDateOfBirthValid = (dateOfBirth: string): boolean => {
   return birthDate <= today;
 };
 
-export const isAllowedCategory = (category: PetCategory) => {
-  const allowedCategories: PetCategory[] = [
-    "dog",
-    "cat",
-    "rabbit",
-    "parrot",
-    "rodent",
-  ];
-  return allowedCategories.includes(category);
-};
-
 export const petCategory = [
   { label: "❔ Unspecified", value: "unspecified" },
   { label: "🐶 Dog", value: "dog" },
@@ -45,7 +22,7 @@ export const petCategory = [
   { label: "🐭 Rodent", value: "rodent" },
 ];
 
-export const getAnimalEmoji = (animal: string) => {
+export const getAnimalEmoji = (animal: PetCategory) => {
   switch (animal) {
     case "dog":
       return "🐶";
