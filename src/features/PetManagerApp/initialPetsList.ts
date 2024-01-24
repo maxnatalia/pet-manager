@@ -1,4 +1,4 @@
-import { Pet } from "./petsContext";
+import { Pet } from "./types";
 
 export const initialPetsList: Pet[] = [
   {
@@ -24,6 +24,11 @@ export const initialPetsList: Pet[] = [
         id: "1",
         eventName: "wizyta",
         eventDate: "2024-02-01",
+      },
+      {
+        id: "2",
+        eventName: "wizyta22222",
+        eventDate: "2024-03-21",
       },
     ],
   },
