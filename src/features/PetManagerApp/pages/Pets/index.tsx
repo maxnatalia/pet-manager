@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 import { MdEditDocument } from "react-icons/md";
@@ -7,14 +8,11 @@ import usePetsContext from "../../usePetsContext";
 import {
   Avatar,
   Box,
-  BoxEvent,
   BoxTitle,
   ButtonIcon,
   ButtonsBox,
   EventButton,
-  EventListContainer,
   Events,
-  PageContent,
   PetCard,
   PetsContainer,
   SubtitleCard,
@@ -25,91 +23,77 @@ import { getAnimalEmoji } from "../../utils";
 
 const Pets = () => {
   const navigate = useNavigate();
-  const { petsList, handleRemovePet, handleEditPet } = usePetsContext();
+  const { petsList, handleRemovePet, handleEditPet, editableId } =
+    usePetsContext();
+
+  useEffect(() => {
+    if (editableId) {
+      navigate("/form");
+    }
+  }, [editableId, navigate]);
 
   return (
     <>
       <TitlePage
-        title="Pet List Management"
+        title="Pets List"
         subtitle="Here you can view, edit and delete your pets"
         icon={<MdFeaturedPlayList />}
       />
-      <PageContent>
-        <PetsContainer>
-          {petsList.map(pet => (
-            <PetCard key={pet.id}>
-              <BoxTitle>
-                <Avatar>{getAnimalEmoji(pet.category)}</Avatar>
-                <div>
-                  <TitleCard>{pet.petName}</TitleCard>
-                  <SubtitleCard>{pet.breed}</SubtitleCard>
-                </div>
-              </BoxTitle>
-              <BoxTitle>
-                <Events>{pet.events.length}</Events>
-                <div>
-                  <TitleCard>{pet.petName}'s Events</TitleCard>
-                  <EventButton onClick={() => navigate(`/pet/${pet.id}`)}>
-                    Manage Events
-                  </EventButton>
-                </div>
-              </BoxTitle>
-              <Box>
-                <div>
-                  <div>Added:</div>
-                  <div>XX.XX.XXXX</div>
-                </div>
-                <div>
-                  <div>Edited:</div>
-                  <div>XX.XX.XXXX</div>
-                </div>
-              </Box>
+      <PetsContainer>
+        {petsList.map(pet => (
+          <PetCard key={pet.id}>
+            <BoxTitle>
+              <Avatar>{getAnimalEmoji(pet.category)}</Avatar>
+              <div>
+                <TitleCard>{pet.petName}</TitleCard>
+                <SubtitleCard>{pet.breed}</SubtitleCard>
+              </div>
+            </BoxTitle>
+            <BoxTitle>
+              <Events>{pet.events.length}</Events>
+              <div>
+                <TitleCard>{pet.petName}'s Events</TitleCard>
+                <EventButton onClick={() => navigate(`/pet/${pet.id}`)}>
+                  Manage Events
+                </EventButton>
+              </div>
+            </BoxTitle>
+            <Box>
+              <div>
+                <div>Added:</div>
+                <div>XX.XX.XXXX</div>
+              </div>
+              <div>
+                <div>Edited:</div>
+                <div>XX.XX.XXXX</div>
+              </div>
+            </Box>
 
-              <ButtonsBox>
-                <ButtonIcon
-                  onClick={() => navigate(`/pet/${pet.id}`)}
-                  title="See More Details"
-                >
-                  <MdMore />
-                </ButtonIcon>
-                <ButtonIcon
-                  $remove
-                  title="Remove Pet"
-                  onClick={() => handleRemovePet(pet.id)}
-                >
-                  <MdDelete />
-                </ButtonIcon>
-                <ButtonIcon
-                  $edit
-                  title="Edit Pet"
-                  onClick={() => {
-                    navigate("/form");
-                    handleEditPet(pet.id);
-                  }}
-                >
-                  <MdEditDocument />
-                </ButtonIcon>
-              </ButtonsBox>
-            </PetCard>
-          ))}
-        </PetsContainer>
-
-        <EventListContainer>
-          <h2>List of Events:</h2>
-          {petsList.map(pet => (
-            <div key={pet.id}>
-              <h3>{pet.petName}'s Events:</h3>
-              {pet.events.length === 0 && <p>No events!</p>}
-              {pet.events.map(event => (
-                <div key={event.id}>
-                  {event.eventName} - {event.eventDate}
-                  <button>Edit Event</button>
-                </div>
-              ))}
-            </div>
-          ))}
-        </EventListContainer>
-      </PageContent>
+            <ButtonsBox>
+              <ButtonIcon
+                onClick={() => navigate(`/pet/${pet.id}`)}
+                title="See More Details"
+              >
+                <MdMore />
+              </ButtonIcon>
+              <ButtonIcon
+                $remove
+                title="Remove Pet"
+                onClick={() => handleRemovePet(pet.id)}
+              >
+                <MdDelete />
+              </ButtonIcon>
+              <ButtonIcon
+                $edit
+                title="Edit Pet"
+                onClick={() => handleEditPet(pet.id)}
+              >
+                <MdEditDocument />
+              </ButtonIcon>
+            </ButtonsBox>
+          </PetCard>
+        ))}
+      </PetsContainer>
     </>
   );
 };
