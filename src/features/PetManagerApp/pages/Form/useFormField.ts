@@ -1,7 +1,8 @@
 import { FormEvent, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { nanoid } from "nanoid";
-import { PetCategory, isDateOfBirthValid, isNotEmpty } from "../../utils";
+import { isDateOfBirthValid, isNotEmpty } from "../../utils";
+import { PetCategory } from "../../types";
 import usePetsContext from "../../usePetsContext";
 import useField from "./useField";
 
@@ -72,6 +73,7 @@ const useFormField = () => {
     }
   }, [
     editableId,
+    navigate,
     getPetById,
     petNameSetValue,
     breedSetValue,
@@ -117,6 +119,11 @@ const useFormField = () => {
     setEditableId("");
   };
 
+  const handleCancelForm = () => {
+    navigate("/");
+    setEditableId("");
+  };
+
   const onFormSubmit = (e: FormEvent) => {
     e.preventDefault();
 
@@ -126,7 +133,6 @@ const useFormField = () => {
       dateOfBirthSetIsTouched(true);
       return;
     }
-    console.log(petsList);
     addOrUpdatePet();
     navigate("/pets");
   };
@@ -151,6 +157,7 @@ const useFormField = () => {
     dateOfBirthBlurHandler,
     dateOfBirthChangedHandler,
     dateOfBirthHasError,
+    handleCancelForm,
   };
 };
 
