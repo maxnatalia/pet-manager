@@ -4,7 +4,7 @@ import usePetsContext from "../../usePetsContext";
 import useFormField from "./useFormField";
 import AddicionalDataForm from "./AddicionalDataForm";
 import BasicDataForm from "./BasicDataForm";
-import { FormBox, SubmitButton } from "./styled";
+import { CancelButton, FormBox, SubmitButton } from "./styled";
 
 const Form = () => {
   const { editableId } = usePetsContext();
@@ -28,12 +28,13 @@ const Form = () => {
     genderChangedHandler,
     description,
     descriptionChangedHandler,
+    handleCancelForm,
   } = useFormField();
 
   return (
     <>
       <TitlePage
-        title="Form"
+        title={`${editableId === "" ? "Form" : "Editing Form"}`}
         subtitle="Here you can add your new pet to the list"
         icon={<FaWpforms />}
       />
@@ -64,6 +65,9 @@ const Form = () => {
         <SubmitButton type="submit">
           {editableId ? "Save changes" : "Add new Pet"}
         </SubmitButton>
+        <CancelButton type="button" onClick={handleCancelForm}>
+          Cancel
+        </CancelButton>
       </FormBox>
     </>
   );
