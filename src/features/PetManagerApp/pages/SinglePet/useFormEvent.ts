@@ -1,8 +1,9 @@
 import { FormEvent, useEffect } from "react";
 import useField from "../Form/useField";
 import usePetsContext from "../../usePetsContext";
-import { isNotEmpty } from "../../utils";
+import { isDateOfEventValid, isNotEmpty } from "../../utils";
 import { nanoid } from "nanoid";
+import { EventCategory } from "../../types";
 
 const useFormEvent = (petId: string | undefined) => {
   const { setPetsList, petsList, editableEventId, setEditableEventId } =
@@ -26,22 +27,36 @@ const useFormEvent = (petId: string | undefined) => {
     inputBlurHandler: eventDateBlurHandler,
     setEnteredValue: eventDateSetValue,
     setIsTouched: eventDateSetIsTouched,
-  } = useField({ validateValue: isNotEmpty });
+  } = useField({ validateValue: isDateOfEventValid });
+
+  const {
+    value: eventCategory,
+    valueChangeHandler: eventCategoryChangedHandler,
+    setEnteredValue: eventCategorySetValue,
+  } = useField({ initialValue: "unspecified" });
 
   useEffect(() => {
     if (petId) {
       const editablePet = petsList.find(pet => pet.id === petId);
       if (editablePet) {
         const editableEvent = editablePet.events.find(
-          event => event.id === editableEventId
+          event => event.eventId === editableEventId
         );
         if (editableEvent) {
           eventNameSetValue(editableEvent.eventName);
           eventDateSetValue(editableEvent.eventDate);
+          eventCategorySetValue(editableEvent.eventCategory);
         }
       }
     }
-  }, [petId, petsList, eventNameSetValue, eventDateSetValue, editableEventId]);
+  }, [
+    petId,
+    petsList,
+    eventNameSetValue,
+    eventDateSetValue,
+    eventCategorySetValue,
+    editableEventId,
+  ]);
 
   const formIsValid = eventNameIsValid && eventDateIsValid;
 
@@ -53,9 +68,10 @@ const useFormEvent = (petId: string | undefined) => {
             events: [
               ...pet.events,
               {
-                id: nanoid(),
+                eventId: nanoid(),
                 eventName,
                 eventDate,
+                eventCategory: eventCategory as EventCategory,
               },
             ],
           }
@@ -71,11 +87,12 @@ const useFormEvent = (petId: string | undefined) => {
         ? {
             ...pet,
             events: pet.events.map(event =>
-              event.id === editableEventId
+              event.eventId === editableEventId
                 ? {
-                    id: editableEventId,
+                    eventId: editableEventId,
                     eventName,
                     eventDate,
+                    eventCategory: eventCategory as EventCategory,
                   }
                 : event
             ),
@@ -117,6 +134,8 @@ const useFormEvent = (petId: string | undefined) => {
     eventDateHasError,
     eventDateChangedHandler,
     eventDateBlurHandler,
+    eventCategory,
+    eventCategoryChangedHandler,
   };
 };
 
