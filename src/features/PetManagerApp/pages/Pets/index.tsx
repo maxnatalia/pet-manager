@@ -19,7 +19,7 @@ import {
   TitleCard,
 } from "./styled";
 import TitlePage from "../../../../common/TitlePage";
-import { getAnimalEmoji } from "../../utils";
+import { getPetEmoji } from "../../utils";
 
 const Pets = () => {
   const navigate = useNavigate();
@@ -43,7 +43,7 @@ const Pets = () => {
         {petsList.map(pet => (
           <PetCard key={pet.id}>
             <BoxTitle>
-              <Avatar>{getAnimalEmoji(pet.category)}</Avatar>
+              <Avatar>{getPetEmoji(pet.category)}</Avatar>
               <div>
                 <TitleCard>{pet.petName}</TitleCard>
                 <SubtitleCard>{pet.breed}</SubtitleCard>
