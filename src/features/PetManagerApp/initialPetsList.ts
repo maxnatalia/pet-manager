@@ -2,7 +2,7 @@ import { Pet } from "./types";
 
 export const initialPetsList: Pet[] = [
   {
-    id: "1",
+    id: "1Frida",
     petName: "Frida",
     breed: "Ara Severa",
     category: "parrot",
@@ -12,7 +12,7 @@ export const initialPetsList: Pet[] = [
     events: [],
   },
   {
-    id: "2",
+    id: "2Rio",
     petName: "Rio",
     breed: "King Charles",
     category: "dog",
@@ -21,14 +21,39 @@ export const initialPetsList: Pet[] = [
     dateOfBirth: "2020-11-05",
     events: [
       {
-        id: "1",
+        eventId: "1RioEvent",
         eventName: "wizyta",
         eventDate: "2024-02-01",
+        eventCategory: "groomer",
       },
       {
-        id: "2",
+        eventId: "2RioEvent",
         eventName: "wizyta22222",
         eventDate: "2024-03-21",
+        eventCategory: "vet",
+      },
+    ],
+  },
+  {
+    id: "3Lily",
+    petName: "Lily",
+    breed: "Rabbit",
+    category: "rabbit",
+    gender: "female",
+    description: "Opis Lily",
+    dateOfBirth: "2023-07-25",
+    events: [
+      {
+        eventId: "1LilyEvent",
+        eventName: "wizyta groomer",
+        eventDate: "2024-01-26",
+        eventCategory: "show",
+      },
+      {
+        eventId: "2LilyEvent",
+        eventName: "wizyta wet",
+        eventDate: "2024-05-06",
+        eventCategory: "training",
       },
     ],
   },
