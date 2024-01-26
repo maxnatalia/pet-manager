@@ -1,5 +1,5 @@
 import { ChangeEventHandler } from "react";
-import { petCategory } from "../../../utils";
+import { petCategoryOptions } from "../../../utils";
 import { BlockBox, CustomRadio, FieldBox, Input, Label } from "../styled";
 
 type AdditionalDataFormProps = {
@@ -24,7 +24,7 @@ const AddicionalDataForm = ({
       <FieldBox>
         <Label>Pet category:</Label>
         <Input as={"select"} onChange={categoryChangedHandler} value={category}>
-          {petCategory.map((category, index) => (
+          {petCategoryOptions.map((category, index) => (
             <option key={`${index} - ${category.value}`} value={category.value}>
               {category.label}
             </option>
