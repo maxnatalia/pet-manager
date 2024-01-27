@@ -17,10 +17,22 @@ export type PetCategory =
   | "parrot"
   | "rodent";
 
+export type EventCategory =
+  | "unspecified"
+  | "vet"
+  | "groomer"
+  | "show"
+  | "training";
+
 export type EventType = {
-  id: string;
+  eventId: string;
   eventName: string;
   eventDate: string;
+  eventCategory: EventCategory;
 };
+export type AllEvents = {
+  petName: string;
+  petCategory: PetCategory;
+} & EventType;
 
 export type ValidationFunction = (value: string) => boolean;
