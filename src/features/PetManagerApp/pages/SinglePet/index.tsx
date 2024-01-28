@@ -3,6 +3,7 @@ import { MdOutlinePets } from "react-icons/md";
 import usePetsContext from "../../usePetsContext";
 import useFormEvent from "./useFormEvent";
 import TitlePage from "../../../../common/TitlePage";
+import { eventCategoryOptions } from "../../utils";
 
 const SinglePet = () => {
   const { id } = useParams();
@@ -13,10 +14,14 @@ const SinglePet = () => {
     onFormSubmit,
     eventName,
     eventNameChangedHandler,
+    eventNameBlurHandler,
     eventNameHasError,
     eventDate,
     eventDateChangedHandler,
+    eventDateBlurHandler,
     eventDateHasError,
+    eventCategory,
+    eventCategoryChangedHandler,
   } = useFormEvent(selectedPet?.id);
 
   if (selectedPet === undefined) {
@@ -43,10 +48,10 @@ const SinglePet = () => {
           <p>You don't have any events for {selectedPet.petName} yet.</p>
         )}
         {selectedPet.events.map(event => (
-          <div key={event.id}>
+          <div key={event.eventId}>
             {event.eventName} - {event.eventDate}
             <button
-              onClick={() => handleEditPetEvent(selectedPet.id, event.id)}
+              onClick={() => handleEditPetEvent(selectedPet.id, event.eventId)}
             >
               Edit Event
             </button>
@@ -57,25 +62,55 @@ const SinglePet = () => {
         <h2>EVENTS:</h2>
         <form onSubmit={onFormSubmit}>
           <div>
-            <label>Name of Event:</label>
+            <label>Name of Event:*</label>
             <input
               type="text"
               value={eventName}
               name="eventName"
               onChange={eventNameChangedHandler}
+              onBlur={eventNameBlurHandler}
             />
           </div>
-          {eventNameHasError && <p>Error!</p>}
+          {eventNameHasError && (
+            <p>
+              Error! Name of Event is requiered! You must enter at least three
+              characters.
+            </p>
+          )}
           <div>
-            <label>Date of Event:</label>
+            <label>Date of Event:*</label>
             <input
               type="date"
               name="eventDate"
               value={eventDate}
               onChange={eventDateChangedHandler}
+              onBlur={eventDateBlurHandler}
             />
           </div>
-          {eventDateHasError && <p>Error!</p>}
+          {eventDateHasError && (
+            <p>
+              Error! Date of event is requiered! Date of event must be after or
+              equal today.
+            </p>
+          )}
+
+          <div>
+            <label>Event Category:</label>
+            <select
+              name="eventCategory"
+              value={eventCategory}
+              onChange={eventCategoryChangedHandler}
+            >
+              {eventCategoryOptions.map((category, index) => (
+                <option
+                  key={`${index} - ${category.value}`}
+                  value={category.value}
+                >
+                  {category.label}
+                </option>
+              ))}
+            </select>
+          </div>
 
           <button type="submit">
             {editableEventId ? "Save changes" : "Add new Event"}
