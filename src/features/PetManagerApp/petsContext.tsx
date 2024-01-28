@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 import { initialPetsList } from "./initialPetsList";
-import { EventType, Pet } from "./types";
+import { AllEvents, EventType, Pet } from "./types";
 
 type PetsContextType = {
   petsList: Pet[];
@@ -12,7 +12,9 @@ type PetsContextType = {
   getPetById: (selectedPetId: Pet["id"] | undefined) => Pet | undefined;
   handleRemovePet: (id: Pet["id"]) => void;
   handleEditPet: (id: Pet["id"]) => void;
-  handleEditPetEvent: (petId: Pet["id"], eventId: EventType["id"]) => void;
+  handleEditPetEvent: (petId: Pet["id"], eventId: EventType["eventId"]) => void;
+  allEvents: AllEvents[];
+  todayEvents: AllEvents[];
 };
 
 type PetsProviderProps = {
@@ -37,15 +39,31 @@ export const PetsProvider = ({ children }: PetsProviderProps) => {
     setEditableId(id);
   };
 
-  const handleEditPetEvent = (petId: Pet["id"], eventId: EventType["id"]) => {
+  const handleEditPetEvent = (
+    petId: Pet["id"],
+    eventId: EventType["eventId"]
+  ) => {
     const editableEvent = petsList
       .find(pet => pet.id === petId)
-      ?.events.find(event => event.id === eventId);
+      ?.events.find(event => event.eventId === eventId);
 
     if (editableEvent) {
       setEditableEventId(eventId);
     }
   };
+
+  const allEvents = petsList.flatMap(pet =>
+    pet.events.map(event => ({
+      ...event,
+      petName: pet.petName,
+      petCategory: pet.category,
+    }))
+  );
+
+  const todayEvents = allEvents.filter(event => {
+    const today = new Date().toISOString().split("T")[0];
+    return event.eventDate === today;
+  });
 
   return (
     <PetsContext.Provider
@@ -60,6 +78,8 @@ export const PetsProvider = ({ children }: PetsProviderProps) => {
         editableEventId,
         setEditableEventId,
         handleEditPetEvent,
+        allEvents,
+        todayEvents,
       }}
     >
       {children}
