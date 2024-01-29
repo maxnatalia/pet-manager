@@ -18,7 +18,7 @@ export const Container = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoint.tablet}px) {
     grid-template-columns: 1fr;
     grid-template-areas:
-      "header "
+      "header"
       "nav"
       "main"
       "footer";
