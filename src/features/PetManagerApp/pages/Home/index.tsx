@@ -1,5 +1,10 @@
 import { MdDashboard } from "react-icons/md";
 import TitlePage from "../../../../common/TitlePage";
+import Overview from "./Overview";
+import Today from "./Today";
+import LatestPets from "./LatestPets";
+// import PieChartStat from "./PieChartStat";
+import { GridContent } from "./styled";
 
 const Home = () => {
   return (
@@ -9,6 +14,12 @@ const Home = () => {
         subtitle="Today is XX may 2020"
         icon={<MdDashboard />}
       />
+      {/* <PieChartStat /> */}
+      <GridContent>
+        <Today />
+        <Overview />
+        <LatestPets />
+      </GridContent>
     </>
   );
 };
