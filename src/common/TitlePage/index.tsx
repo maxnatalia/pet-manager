@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { Subtitle, Title } from "./styled";
+import { Subtitle, Title, Wrapper } from "./styled";
 
 type TitlePageProps = {
   title: string;
@@ -9,13 +9,13 @@ type TitlePageProps = {
 
 const TitlePage = ({ title, icon, subtitle }: TitlePageProps) => {
   return (
-    <div>
+    <Wrapper>
       <Title>
         {icon}
         {title}
       </Title>
       <Subtitle>{subtitle}</Subtitle>
-    </div>
+    </Wrapper>
   );
 };
 
