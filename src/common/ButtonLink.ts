@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const ButtonLink = styled.button`
+export const ButtonLink = styled.button<{ $active?: boolean }>`
   padding: 6px 10px;
   display: flex;
   align-items: center;
@@ -17,4 +17,12 @@ export const ButtonLink = styled.button`
     background-color: ${({ theme }) => theme.color.special};
     color: ${({ theme }) => theme.color.backgroundPrimary};
   }
+
+  ${({ $active }) =>
+    $active &&
+    css`
+      background-color: ${({ theme }) => theme.color.special};
+      color: ${({ theme }) => theme.color.backgroundPrimary};
+      pointer-events: none;
+    `}
 `;
