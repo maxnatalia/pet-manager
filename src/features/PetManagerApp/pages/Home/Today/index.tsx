@@ -2,7 +2,6 @@ import { MdEventBusy } from "react-icons/md";
 import { TitleBox } from "../../../../../common/TitleBox";
 import { getEventEmoji, getPetEmoji } from "../../../utils";
 import {
-  ButtonLink,
   EventCard,
   EventsWrapper,
   ExtraNumber,
@@ -11,6 +10,7 @@ import {
 } from "./styled";
 import usePetsContext from "../../../usePetsContext";
 import { useNavigate } from "react-router-dom";
+import { ButtonLink } from "../../../../../common/ButtonLink";
 
 const Today = () => {
   const { todayEvents } = usePetsContext();
@@ -20,7 +20,7 @@ const Today = () => {
     <TodayBox>
       {todayEvents.length === 0 ? (
         <TitleBox>
-          Today you don't have any events <MdEventBusy />
+          Today you don't have events: <MdEventBusy />
         </TitleBox>
       ) : (
         <TitleBox>
@@ -37,7 +37,7 @@ const Today = () => {
               title={"See more events"}
               onClick={() => navigate("/events")}
             >
-              {getEventEmoji(event.eventCategory)}
+              <span>{getEventEmoji(event.eventCategory)}</span>
               {event.eventCategory}
             </ButtonLink>
           </EventCard>
