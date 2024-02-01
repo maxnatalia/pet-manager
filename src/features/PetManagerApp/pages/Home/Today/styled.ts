@@ -41,17 +41,3 @@ export const EventCard = styled.div`
 export const PetDetails = styled.div`
   font-weight: 700;
 `;
-
-export const ButtonLink = styled.button`
-  padding: 6px 10px;
-  font-weight: 100;
-  text-transform: uppercase;
-  border-radius: 20px;
-  border: 1px solid ${({ theme }) => theme.color.special};
-  cursor: pointer;
-  transition: all 0.5s ease-in-out;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.color.special};
-  }
-`;
