@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import { initialPetsList } from "./initialPetsList";
-import { AllEvents, EventType, Pet } from "./types";
+import { AllEvents, EventCategory, EventType, Pet, PetCategory } from "./types";
+import { eventCategories, petCategories } from "./utils";
 
 type PetsContextType = {
   petsList: Pet[];
@@ -15,6 +16,11 @@ type PetsContextType = {
   handleEditPetEvent: (petId: Pet["id"], eventId: EventType["eventId"]) => void;
   allEvents: AllEvents[];
   todayEvents: AllEvents[];
+  archiveEvents: AllEvents[];
+  futureEvents: AllEvents[];
+  countPetsByCategory: { category: PetCategory; count: number }[];
+  totalEvents: number;
+  countEventsByCategory: { category: EventCategory; count: number }[];
 };
 
 type PetsProviderProps = {
@@ -52,6 +58,11 @@ export const PetsProvider = ({ children }: PetsProviderProps) => {
     }
   };
 
+  const countPetsByCategory = petCategories.map(category => ({
+    category: category as PetCategory,
+    count: petsList.filter(pet => pet.category === category).length,
+  }));
+
   const allEvents = petsList.flatMap(pet =>
     pet.events.map(event => ({
       ...event,
@@ -60,10 +71,50 @@ export const PetsProvider = ({ children }: PetsProviderProps) => {
     }))
   );
 
+  const totalEvents = petsList.reduce(
+    (totalEvents, pet) => totalEvents + pet.events.length,
+    0
+  );
+
+  const countEventsByCategory = eventCategories.map(category => ({
+    category: category as EventCategory,
+    count: allEvents.filter(event => event.eventCategory === category).length,
+  }));
+
   const todayEvents = allEvents.filter(event => {
     const today = new Date().toISOString().split("T")[0];
     return event.eventDate === today;
   });
+
+  const createArchiveEvents = () => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const pastEvents = allEvents.filter(event => {
+      const eventDate = new Date(event.eventDate);
+      eventDate.setHours(0, 0, 0, 0);
+      return eventDate < today;
+    });
+
+    return pastEvents;
+  };
+
+  const archiveEvents = createArchiveEvents();
+
+  const createFutureEvents = () => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const futureEvents = allEvents.filter(event => {
+      const eventDate = new Date(event.eventDate);
+      eventDate.setHours(0, 0, 0, 0);
+      return eventDate >= today;
+    });
+
+    return futureEvents;
+  };
+
+  const futureEvents = createFutureEvents();
 
   return (
     <PetsContext.Provider
@@ -80,6 +131,11 @@ export const PetsProvider = ({ children }: PetsProviderProps) => {
         handleEditPetEvent,
         allEvents,
         todayEvents,
+        archiveEvents,
+        futureEvents,
+        countPetsByCategory,
+        totalEvents,
+        countEventsByCategory,
       }}
     >
       {children}
