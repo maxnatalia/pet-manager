@@ -8,7 +8,7 @@ import Events from "./pages/Events";
 
 const PetManagerApp = () => {
   return (
-    <BrowserRouter basename="/pet-manager">
+    <BrowserRouter basename="/pet-manager/">
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
