@@ -1,32 +1,62 @@
 import { MdPets } from "react-icons/md";
 import { MdEvent } from "react-icons/md";
-import { OverviewBox, TotalCard, WrapperCard } from "./styled";
+import {
+  Avatar,
+  CategoryWrapper,
+  Count,
+  OverviewBox,
+  Total,
+  TotalCard,
+  WrapperCard,
+} from "./styled";
 import { TitleBox } from "../../../../../common/TitleBox";
 import usePetsContext from "../../../usePetsContext";
+import { getEventEmoji, getPetEmoji } from "../../../utils";
 
 const Overview = () => {
-  const { petsList } = usePetsContext();
-
-  const countTotalEvents = () =>
-    petsList.reduce((totalEvents, pet) => totalEvents + pet.events.length, 0);
+  const { petsList, countPetsByCategory, totalEvents, countEventsByCategory } =
+    usePetsContext();
 
   return (
     <OverviewBox>
       <TitleBox>Overview:</TitleBox>
       <WrapperCard>
         <TotalCard>
-          <MdPets />
+          <Total>{petsList.length}</Total>
+
           <div>
-            <div>{petsList.length}</div>
+            <MdPets />
             Pets
           </div>
+
+          <CategoryWrapper>
+            {countPetsByCategory.map(
+              item =>
+                item.count > 0 && (
+                  <Avatar key={item.category}>
+                    {getPetEmoji(item.category)} <Count>{item.count}</Count>
+                  </Avatar>
+                )
+            )}
+          </CategoryWrapper>
         </TotalCard>
         <TotalCard>
-          <MdEvent />
+          <Total>{totalEvents}</Total>
+
           <div>
-            <div>{countTotalEvents()}</div>
+            <MdEvent />
             Events
           </div>
+          <CategoryWrapper>
+            {countEventsByCategory.map(
+              item =>
+                item.count > 0 && (
+                  <Avatar key={item.category}>
+                    {getEventEmoji(item.category)} <Count>{item.count}</Count>
+                  </Avatar>
+                )
+            )}
+          </CategoryWrapper>
         </TotalCard>
       </WrapperCard>
     </OverviewBox>
