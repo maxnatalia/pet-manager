@@ -4,7 +4,7 @@ import usePetsContext from "../../usePetsContext";
 import useFormField from "./useFormField";
 import AddicionalDataForm from "./AddicionalDataForm";
 import BasicDataForm from "./BasicDataForm";
-import { CancelButton, FormBox, SubmitButton } from "./styled";
+import { Button, ButtonsBox, FormBox } from "./styled";
 
 const Form = () => {
   const { editableId } = usePetsContext();
@@ -61,13 +61,14 @@ const Form = () => {
           description={description}
           descriptionChangedHandler={descriptionChangedHandler}
         />
-
-        <SubmitButton type="submit">
-          {editableId ? "Save changes" : "Add new Pet"}
-        </SubmitButton>
-        <CancelButton type="button" onClick={handleCancelForm}>
-          Cancel
-        </CancelButton>
+        <ButtonsBox>
+          <Button type="submit">
+            {editableId ? "Save changes" : "Add new Pet"}
+          </Button>
+          <Button type="button" onClick={handleCancelForm}>
+            Cancel
+          </Button>
+        </ButtonsBox>
       </FormBox>
     </>
   );
