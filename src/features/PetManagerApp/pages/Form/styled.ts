@@ -17,7 +17,6 @@ export const FormBox = styled.form`
       "additional"
       "button";
     grid-gap: 20px;
-    /* padding: 10px; */
   }
 `;
 
@@ -109,8 +108,19 @@ export const CustomRadio = styled.input`
   }
 `;
 
-export const SubmitButton = styled.button`
+export const ButtonsBox = styled.div`
   grid-area: button;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoint.mobile}px) {
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+
+export const Button = styled.button`
   justify-self: center;
   background-color: ${({ theme }) => theme.color.special};
   border-radius: 20px;
@@ -126,8 +136,4 @@ export const SubmitButton = styled.button`
     background-color: ${({ theme }) => theme.color.backgroundSecondary};
     border: 2px solid ${({ theme }) => theme.color.special};
   }
-`;
-
-export const CancelButton = styled.button`
-  background-color: ${({ theme }) => theme.color.special};
 `;
