@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 export const CardsBox = styled.div<{ $column?: boolean }>`
@@ -13,7 +14,9 @@ export const CardsBox = styled.div<{ $column?: boolean }>`
     `}
 `;
 
-export const CardWrapper = styled.div`
+export const CardWrapper = styled(Link)`
+  text-decoration: none;
+  color: ${({ theme }) => theme.color.textPrimary};
   min-width: 330px;
   display: flex;
   align-items: center;
@@ -22,6 +25,14 @@ export const CardWrapper = styled.div`
   border-radius: 20px;
   background-color: ${({ theme }) => theme.color.backgroundPrimary};
   position: relative;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 16px 58px 0px rgba(9, 10, 51, 0.05),
+      0px -2px 50px 0px rgba(9, 10, 51, 0.04);
+  }
 `;
 
 export const CardTab = styled.div`
