@@ -46,6 +46,7 @@ export const mapEventsForCard = (events: AllEvents[]) =>
   events.map(event => ({
     ...event,
     id: event.eventId,
+    navPetId: event.petId,
     cardTitle: `${getEventEmoji(event.eventCategory)} ${event.eventCategory}`,
     cardTab: `${getPetEmoji(event.petCategory)} ${event.petName}`,
     cardContent: event.eventDate,
@@ -55,6 +56,7 @@ export const mapPetsForCard = (pets: Pet[]) =>
   pets.map(pet => ({
     ...pet,
     id: pet.id,
+    navPetId: pet.id,
     cardTitle: `${getPetEmoji(pet.category)} ${pet.breed}`,
     cardTab: `${getPetEmoji(pet.category)} ${pet.petName}`,
     cardContent: pet.gender,
