@@ -31,6 +31,7 @@ export type EventType = {
   eventCategory: EventCategory;
 };
 export type AllEvents = {
+  petId: string;
   petName: string;
   petCategory: PetCategory;
 } & EventType;
