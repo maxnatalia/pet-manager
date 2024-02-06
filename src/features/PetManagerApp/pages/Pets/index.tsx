@@ -9,7 +9,6 @@ import {
   Avatar,
   Box,
   BoxTitle,
-  ButtonIcon,
   ButtonsBox,
   EventButton,
   Events,
@@ -20,6 +19,7 @@ import {
 } from "./styled";
 import TitlePage from "../../../../common/TitlePage";
 import { getPetEmoji } from "../../utils";
+import { ButtonIcon } from "../../../../common/ButtonIcon";
 
 const Pets = () => {
   const navigate = useNavigate();
