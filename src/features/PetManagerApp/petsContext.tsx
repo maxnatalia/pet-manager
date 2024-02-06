@@ -66,6 +66,7 @@ export const PetsProvider = ({ children }: PetsProviderProps) => {
   const allEvents = petsList.flatMap(pet =>
     pet.events.map(event => ({
       ...event,
+      petId: pet.id,
       petName: pet.petName,
       petCategory: pet.category,
     }))
