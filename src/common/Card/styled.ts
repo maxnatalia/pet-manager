@@ -23,13 +23,15 @@ export const CardWrapper = styled(Link)`
   justify-content: space-between;
   padding: 20px;
   border-radius: 20px;
+  border: 1px solid transparent;
   background-color: ${({ theme }) => theme.color.backgroundPrimary};
   position: relative;
   cursor: pointer;
   transition: all 0.5s ease-in-out;
 
   &:hover {
-    transform: scale(1.1);
+    border-left: 1px solid ${({ theme }) => theme.color.special};
+    border-bottom: 1px solid ${({ theme }) => theme.color.special};
     box-shadow: 0px 16px 58px 0px rgba(9, 10, 51, 0.05),
       0px -2px 50px 0px rgba(9, 10, 51, 0.04);
   }
