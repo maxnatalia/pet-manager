@@ -1,43 +1,35 @@
+import { MdEventNote } from "react-icons/md";
+import { TitleBox } from "../../../../common/TitleBox";
+import TitlePage from "../../../../common/TitlePage";
 import usePetsContext from "../../usePetsContext";
-import { getEventEmoji, getPetEmoji } from "../../utils";
+import { EventBlock, EventsBox } from "./styled";
+import Card from "../../../../common/Card";
+import { mapEventsForCard } from "../../utils";
 
 const Events = () => {
-  const { allEvents, todayEvents } = usePetsContext();
+  const { futureEvents, archiveEvents } = usePetsContext();
+
+  const mappedEventsUpcoming = mapEventsForCard(futureEvents);
+  const mappedEventsArchive = mapEventsForCard(archiveEvents);
 
   return (
-    <div>
-      <div>
-        {todayEvents.length > 0 ? (
-          <div>
-            <h3>Today's Events:</h3>
-            <ul>
-              {todayEvents.map(event => (
-                <li key={event.eventId}>
-                  {event.petName}'s Event: {event.eventName} - {event.eventDate}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : (
-          <div>No events today</div>
-        )}
-      </div>
-      <h2>List of Events:</h2>
-      {allEvents.length > 0 ? (
-        <ul>
-          {allEvents.map(event => (
-            <li key={event.eventId}>
-              {getEventEmoji(event.eventCategory)}
-              {event.eventName} - {event.eventDate} -
-              {getPetEmoji(event.petCategory)}
-              {event.petName}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <div>Brak wydarzeń</div>
-      )}
-    </div>
+    <>
+      <TitlePage
+        title="All Events"
+        subtitle="Here you can see your all events📅"
+        icon={<MdEventNote />}
+      />
+      <EventsBox>
+        <EventBlock>
+          <TitleBox>Upcoming Events:</TitleBox>
+          <Card $column data={mappedEventsUpcoming} />
+        </EventBlock>
+        <EventBlock>
+          <TitleBox>Archive Events:</TitleBox>
+          <Card $column data={mappedEventsArchive} />
+        </EventBlock>
+      </EventsBox>
+    </>
   );
 };
 
