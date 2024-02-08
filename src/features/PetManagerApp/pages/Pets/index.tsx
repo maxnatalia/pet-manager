@@ -52,7 +52,7 @@ const Pets = () => {
             <BoxTitle>
               <Events>{pet.events.length}</Events>
               <div>
-                <TitleCard>{pet.petName}'s Events</TitleCard>
+                <TitleCard>Events</TitleCard>
                 <EventButton onClick={() => navigate(`/pet/${pet.id}`)}>
                   Manage Events
                 </EventButton>
