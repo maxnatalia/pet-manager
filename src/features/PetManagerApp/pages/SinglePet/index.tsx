@@ -1,13 +1,44 @@
-import { useParams } from "react-router-dom";
+import { MdDelete } from "react-icons/md";
+import { MdEditDocument } from "react-icons/md";
+import { useNavigate, useParams } from "react-router-dom";
 import { MdOutlinePets } from "react-icons/md";
 import usePetsContext from "../../usePetsContext";
 import useFormEvent from "./useFormEvent";
 import TitlePage from "../../../../common/TitlePage";
 import { eventCategoryOptions } from "../../utils";
+import {
+  ButtonsBox,
+  CategoryBox,
+  CategoryWrapper,
+  ContentBox,
+  DataBox,
+  EventsBox,
+  ExtraBox,
+  FormBox,
+  PetBox,
+  PetName,
+} from "./styled";
+import { ButtonIcon } from "../../../../common/ButtonIcon";
+import { useEffect } from "react";
 
 const SinglePet = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
-  const { getPetById, handleEditPetEvent, editableEventId } = usePetsContext();
+  const {
+    getPetById,
+    handleEditPetEvent,
+    editableEventId,
+    handleRemovePet,
+    handleEditPet,
+    editableId,
+  } = usePetsContext();
+
+  useEffect(() => {
+    if (editableId) {
+      navigate("/form");
+    }
+  }, [editableId, navigate]);
+
   const selectedPet = getPetById(id);
 
   const {
@@ -35,88 +66,147 @@ const SinglePet = () => {
         subtitle={`Here you can add events for ${selectedPet.petName} and managed data`}
         icon={<MdOutlinePets />}
       />
-      <div>
-        <h2>{selectedPet.petName}</h2>
-        <p>{selectedPet.breed}</p>
-        <p>{selectedPet.category}</p>
-        <p>{selectedPet.gender}</p>
-        <p>{selectedPet.dateOfBirth} - AGE - X</p>
-      </div>
-      <div>
-        <h2>List of Events:</h2>
-        {selectedPet.events.length === 0 && (
-          <p>You don't have any events for {selectedPet.petName} yet.</p>
-        )}
-        {selectedPet.events.map(event => (
-          <div key={event.eventId}>
-            {event.eventName} - {event.eventDate}
-            <button
-              onClick={() => handleEditPetEvent(selectedPet.id, event.eventId)}
+      <ContentBox>
+        <PetBox>
+          <ButtonsBox>
+            <ButtonIcon
+              $edit
+              title={"Edit pet data"}
+              onClick={() => handleEditPet(selectedPet.id)}
             >
-              Edit Event
+              <MdEditDocument />
+            </ButtonIcon>
+
+            <ButtonIcon
+              $remove
+              title={"Remove pet"}
+              onClick={() => {
+                handleRemovePet(selectedPet.id);
+                navigate("/pets");
+              }}
+            >
+              <MdDelete />
+            </ButtonIcon>
+          </ButtonsBox>
+          <DataBox>
+            <div>
+              <CategoryWrapper>
+                <CategoryBox>📌 name</CategoryBox>
+                <PetName>{selectedPet.petName}</PetName>
+              </CategoryWrapper>
+              <CategoryWrapper>
+                <CategoryBox>📌 breed</CategoryBox>
+                <PetName>{selectedPet.breed}</PetName>
+              </CategoryWrapper>
+              <CategoryWrapper>
+                <CategoryBox>📌 gender</CategoryBox>
+                <PetName>{selectedPet.gender}</PetName>
+              </CategoryWrapper>
+              <CategoryWrapper>
+                <CategoryBox>📌 type</CategoryBox>
+                <PetName>{selectedPet.category}</PetName>
+              </CategoryWrapper>
+              <CategoryWrapper>
+                <CategoryBox>📌 date of birth</CategoryBox>
+                <PetName>{selectedPet.dateOfBirth}</PetName>
+              </CategoryWrapper>
+              <CategoryWrapper>
+                <CategoryBox>📌 description</CategoryBox>
+                <PetName>{selectedPet.description}</PetName>
+              </CategoryWrapper>
+            </div>
+            <ExtraBox>
+              <div>
+                <div>adding date</div>
+                <div>XX.XX.XXXX</div>
+              </div>
+              <div>
+                <div>update date</div>
+                <div>XX.XX.XXXX</div>
+              </div>
+            </ExtraBox>
+          </DataBox>
+        </PetBox>
+
+        <FormBox>
+          <h2>EVENTS:</h2>
+          <form onSubmit={onFormSubmit}>
+            <div>
+              <label>Name of Event:*</label>
+              <input
+                type="text"
+                value={eventName}
+                name="eventName"
+                onChange={eventNameChangedHandler}
+                onBlur={eventNameBlurHandler}
+              />
+            </div>
+            {eventNameHasError && (
+              <p>
+                Error! Name of Event is requiered! You must enter at least three
+                characters.
+              </p>
+            )}
+            <div>
+              <label>Date of Event:*</label>
+              <input
+                type="date"
+                name="eventDate"
+                value={eventDate}
+                onChange={eventDateChangedHandler}
+                onBlur={eventDateBlurHandler}
+              />
+            </div>
+            {eventDateHasError && (
+              <p>
+                Error! Date of event is requiered! Date of event must be after
+                or equal today.
+              </p>
+            )}
+
+            <div>
+              <label>Event Category:</label>
+              <select
+                name="eventCategory"
+                value={eventCategory}
+                onChange={eventCategoryChangedHandler}
+              >
+                {eventCategoryOptions.map((category, index) => (
+                  <option
+                    key={`${index} - ${category.value}`}
+                    value={category.value}
+                  >
+                    {category.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <button type="submit">
+              {editableEventId ? "Save changes" : "Add new Event"}
             </button>
-          </div>
-        ))}
-      </div>
-      <div>
-        <h2>EVENTS:</h2>
-        <form onSubmit={onFormSubmit}>
-          <div>
-            <label>Name of Event:*</label>
-            <input
-              type="text"
-              value={eventName}
-              name="eventName"
-              onChange={eventNameChangedHandler}
-              onBlur={eventNameBlurHandler}
-            />
-          </div>
-          {eventNameHasError && (
-            <p>
-              Error! Name of Event is requiered! You must enter at least three
-              characters.
-            </p>
-          )}
-          <div>
-            <label>Date of Event:*</label>
-            <input
-              type="date"
-              name="eventDate"
-              value={eventDate}
-              onChange={eventDateChangedHandler}
-              onBlur={eventDateBlurHandler}
-            />
-          </div>
-          {eventDateHasError && (
-            <p>
-              Error! Date of event is requiered! Date of event must be after or
-              equal today.
-            </p>
-          )}
+          </form>
+        </FormBox>
 
-          <div>
-            <label>Event Category:</label>
-            <select
-              name="eventCategory"
-              value={eventCategory}
-              onChange={eventCategoryChangedHandler}
-            >
-              {eventCategoryOptions.map((category, index) => (
-                <option
-                  key={`${index} - ${category.value}`}
-                  value={category.value}
-                >
-                  {category.label}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <button type="submit">
-            {editableEventId ? "Save changes" : "Add new Event"}
-          </button>
-        </form>
-      </div>
+        <EventsBox>
+          <h2>List of Events:</h2>
+          {selectedPet.events.length === 0 && (
+            <p>You don't have any events for {selectedPet.petName} yet.</p>
+          )}
+          {selectedPet.events.map(event => (
+            <div key={event.eventId}>
+              {event.eventName} - {event.eventDate}
+              <button
+                onClick={() =>
+                  handleEditPetEvent(selectedPet.id, event.eventId)
+                }
+              >
+                Edit Event
+              </button>
+            </div>
+          ))}
+        </EventsBox>
+      </ContentBox>
     </>
   );
 };
