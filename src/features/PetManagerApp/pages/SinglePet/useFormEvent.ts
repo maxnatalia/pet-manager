@@ -118,10 +118,15 @@ const useFormEvent = (petId: string | undefined) => {
       console.log("Zaktualizowano event");
     } else {
       addPetEvent();
+
       console.log("Dodano nowy event");
     }
-
-    console.log(petsList);
+    console.log("i tak sie wykonuje wszytsko");
+    eventNameSetValue("");
+    eventDateSetValue("");
+    eventCategorySetValue("");
+    eventNameSetIsTouched(false);
+    eventDateSetIsTouched(false);
   };
 
   return {
