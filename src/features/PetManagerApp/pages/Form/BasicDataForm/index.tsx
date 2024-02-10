@@ -1,5 +1,8 @@
 import { ChangeEventHandler, FocusEventHandler } from "react";
-import { BlockBox, ErrorMsg, FieldBox, Input, Label, Legend } from "../styled";
+import { BlockBox, FieldBox, Legend } from "../styled";
+import { Input } from "../../../../../common/Input";
+import { Label } from "../../../../../common/Label";
+import { ErrorFieldMsg } from "../../../../../common/ErrorFieldMsg";
 
 type BasicDataFormProps = {
   petName: string;
@@ -43,10 +46,10 @@ const BasicDataForm = ({
           onBlur={petNameBlurHandler}
         />
         {petNameHasError && (
-          <ErrorMsg>
+          <ErrorFieldMsg>
             Error! Pet name is requiered! You must enter at least three
             characters.
-          </ErrorMsg>
+          </ErrorFieldMsg>
         )}
       </FieldBox>
       <FieldBox>
@@ -60,9 +63,9 @@ const BasicDataForm = ({
           onBlur={breedBlurHandler}
         />
         {breedHasError && (
-          <ErrorMsg>
+          <ErrorFieldMsg>
             Error! Breed is requiered! You must enter at least three characters.
-          </ErrorMsg>
+          </ErrorFieldMsg>
         )}
       </FieldBox>
       <FieldBox>
@@ -76,10 +79,10 @@ const BasicDataForm = ({
           onBlur={dateOfBirthBlurHandler}
         />
         {dateOfBirthHasError && (
-          <ErrorMsg>
+          <ErrorFieldMsg>
             Error! Date of birth is requiered! Date of birth must be before or
             equal today.
-          </ErrorMsg>
+          </ErrorFieldMsg>
         )}
       </FieldBox>
       <Legend>* - fields required</Legend>
