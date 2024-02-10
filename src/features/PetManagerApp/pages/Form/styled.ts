@@ -40,42 +40,6 @@ export const FieldBox = styled.div<{ $horizontal?: boolean }>`
     `}
 `;
 
-export const Label = styled.label<{ $error?: boolean; $horizontal?: boolean }>`
-  padding: 0 10px;
-  color: ${({ $error, theme }) =>
-    $error ? theme.color.remove : theme.color.textPrimary};
-  font-size: 22px;
-  font-weight: 300;
-
-  ${({ $horizontal }) =>
-    $horizontal &&
-    css`
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    `}
-
-  @media (max-width: ${({ theme }) => theme.breakpoint.mobile}px) {
-    font-size: 18px;
-  }
-`;
-
-export const Input = styled.input<{ $error?: boolean }>`
-  padding: 10px;
-  border-radius: 20px;
-  outline: none;
-  border: 4px solid;
-  border-color: ${({ $error, theme }) =>
-    $error ? theme.color.remove : theme.color.textPrimary};
-`;
-
-export const ErrorMsg = styled.p`
-  padding: 0 10px;
-  color: ${({ theme }) => theme.color.remove};
-  font-weight: 100;
-`;
-
 export const Legend = styled.div`
   padding: 20px;
   font-weight: 500;
