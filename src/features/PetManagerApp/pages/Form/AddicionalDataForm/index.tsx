@@ -1,6 +1,8 @@
 import { ChangeEventHandler } from "react";
 import { petCategoryOptions } from "../../../utils";
-import { BlockBox, CustomRadio, FieldBox, Input, Label } from "../styled";
+import { BlockBox, CustomRadio, FieldBox } from "../styled";
+import { Input } from "../../../../../common/Input";
+import { Label } from "../../../../../common/Label";
 
 type AdditionalDataFormProps = {
   categoryChangedHandler: ChangeEventHandler<HTMLSelectElement>;
@@ -32,7 +34,7 @@ const AddicionalDataForm = ({
         </Input>
       </FieldBox>
       <FieldBox $horizontal>
-        <Label $horizontal>
+        <Label>
           <CustomRadio
             type="radio"
             value="male"
@@ -42,7 +44,7 @@ const AddicionalDataForm = ({
           />
           <span>MALE</span>
         </Label>
-        <Label $horizontal>
+        <Label>
           <CustomRadio
             type="radio"
             value="female"
@@ -52,7 +54,7 @@ const AddicionalDataForm = ({
           />
           <span>FEMALE</span>
         </Label>
-        <Label $horizontal>
+        <Label>
           <CustomRadio
             type="radio"
             value="unspecified"
