@@ -22,6 +22,9 @@ export const PetBox = styled.div`
 
 export const FormBox = styled.div`
   grid-area: form;
+  padding: 20px;
+  background-color: ${({ theme }) => theme.color.backgroundSecondary};
+  border-radius: 20px;
 `;
 
 export const EventsBox = styled.div`
