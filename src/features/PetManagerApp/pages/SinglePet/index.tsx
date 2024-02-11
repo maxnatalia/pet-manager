@@ -20,6 +20,9 @@ import {
 } from "./styled";
 import { ButtonIcon } from "../../../../common/ButtonIcon";
 import { useEffect } from "react";
+import { Input } from "../../../../common/Input";
+import { Label } from "../../../../common/Label";
+import { ErrorFieldMsg } from "../../../../common/ErrorFieldMsg";
 
 const SinglePet = () => {
   const navigate = useNavigate();
@@ -132,8 +135,9 @@ const SinglePet = () => {
           <h2>EVENTS:</h2>
           <form onSubmit={onFormSubmit}>
             <div>
-              <label>Name of Event:*</label>
-              <input
+              <Label $error={eventNameHasError}>Name of Event:*</Label>
+              <Input
+                $error={eventNameHasError}
                 type="text"
                 value={eventName}
                 name="eventName"
@@ -142,14 +146,15 @@ const SinglePet = () => {
               />
             </div>
             {eventNameHasError && (
-              <p>
+              <ErrorFieldMsg>
                 Error! Name of Event is requiered! You must enter at least three
                 characters.
-              </p>
+              </ErrorFieldMsg>
             )}
             <div>
-              <label>Date of Event:*</label>
-              <input
+              <Label $error={eventDateHasError}>Date of Event:*</Label>
+              <Input
+                $error={eventDateHasError}
                 type="date"
                 name="eventDate"
                 value={eventDate}
@@ -158,15 +163,16 @@ const SinglePet = () => {
               />
             </div>
             {eventDateHasError && (
-              <p>
+              <ErrorFieldMsg>
                 Error! Date of event is requiered! Date of event must be after
                 or equal today.
-              </p>
+              </ErrorFieldMsg>
             )}
 
             <div>
-              <label>Event Category:</label>
-              <select
+              <Label>Event Category:</Label>
+              <Input
+                as={"select"}
                 name="eventCategory"
                 value={eventCategory}
                 onChange={eventCategoryChangedHandler}
@@ -179,7 +185,7 @@ const SinglePet = () => {
                     {category.label}
                   </option>
                 ))}
-              </select>
+              </Input>
             </div>
 
             <button type="submit">
