@@ -7,6 +7,7 @@ type SpecialProps = {
 
 export const StyledNavigation = styled.nav`
   grid-area: nav;
+  width: 100%;
   background: ${({ theme }) => theme.color.backgroundSecondary};
   padding-bottom: 20px;
   display: flex;
@@ -16,8 +17,9 @@ export const StyledNavigation = styled.nav`
 
   @media (max-width: ${({ theme }) => theme.breakpoint.tablet}px) {
     flex-direction: row;
+    /* align-items: end; */
     padding-bottom: 0;
-    padding-right: 20px;
+    /* padding-right: 20px; */
     border-radius: 20px;
   }
 `;
@@ -33,6 +35,7 @@ export const List = styled.ul`
   @media (max-width: ${({ theme }) => theme.breakpoint.tablet}px) {
     flex-direction: row;
     padding-top: 20px;
+    padding-right: 20px;
   }
 `;
 
@@ -109,6 +112,6 @@ export const styledIcon = (Icon: React.ComponentType) => styled(
     `}
 
   @media (max-width: ${({ theme }) => theme.breakpoint.mobile}px) {
-    font-size: 36px;
+    font-size: 26px;
   }
 `;
