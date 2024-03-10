@@ -23,13 +23,13 @@ export const initialPetsList: Pet[] = [
       {
         eventId: "1RioEvent",
         eventName: "wizyta",
-        eventDate: "2024-02-01",
+        eventDate: "2024-01-29",
         eventCategory: "groomer",
       },
       {
         eventId: "2RioEvent",
         eventName: "wizyta22222",
-        eventDate: "2024-03-21",
+        eventDate: "2024-01-30",
         eventCategory: "vet",
       },
     ],
@@ -46,7 +46,7 @@ export const initialPetsList: Pet[] = [
       {
         eventId: "1LilyEvent",
         eventName: "wizyta groomer",
-        eventDate: "2024-01-26",
+        eventDate: "2024-01-29",
         eventCategory: "show",
       },
       {
