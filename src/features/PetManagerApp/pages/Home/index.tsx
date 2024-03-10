@@ -5,7 +5,7 @@ import Today from "./Today";
 import LatestPets from "./LatestPets";
 // import PieChartStat from "./PieChartStat";
 import { GridContent } from "./styled";
-import UpcomingEvents from "./UpcomingEvents";
+import FilteringEvents from "./FilteringEvents";
 
 const Home = () => {
   return (
@@ -20,7 +20,7 @@ const Home = () => {
         <Today />
         <Overview />
         <LatestPets />
-        <UpcomingEvents />
+        <FilteringEvents />
       </GridContent>
     </>
   );
