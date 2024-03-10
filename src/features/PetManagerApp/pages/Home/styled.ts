@@ -5,5 +5,5 @@ export const GridContent = styled.div`
   grid-template-areas:
     "today pets"
     "overview pets"
-    "events pets";
+    "events events";
 `;
