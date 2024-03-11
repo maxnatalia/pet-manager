@@ -1,6 +1,6 @@
 import { Cell, Legend, Pie, PieChart } from "recharts";
 import usePetsContext from "../../../usePetsContext";
-import { PetCategory } from "../../../utils";
+import { PetCategory } from "../../../types";
 
 const PieChartStat = () => {
   const { petsList } = usePetsContext();
