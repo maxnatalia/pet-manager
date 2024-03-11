@@ -46,7 +46,7 @@ export const DarkIcon = styled(FaMoon)`
 `;
 
 export const PointerIcon = styled(FaPaw)<PointerIconProps>`
-  color: ${({ theme }) => theme.color.backgroundPrimary};
+  color: ${({ theme }) => theme.color.special};
   font-size: 36px;
   padding: 6px;
   background-color: ${({ theme }) => theme.color.backgroundPrimary};
