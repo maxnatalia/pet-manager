@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from "react";
-import { ValidationFunction } from "../../utils";
+import { ValidationFunction } from "../../types";
 
 type UseFieldProps = {
   validateValue?: ValidationFunction;
