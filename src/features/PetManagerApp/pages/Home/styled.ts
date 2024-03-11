@@ -6,4 +6,12 @@ export const GridContent = styled.div`
     "today pets"
     "overview pets"
     "events events";
+
+  @media (max-width: ${({ theme }) => theme.breakpoint.tablet}px) {
+    grid-template-areas:
+      "today"
+      "overview"
+      "pets"
+      "events";
+  }
 `;
