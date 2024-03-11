@@ -26,7 +26,7 @@ export const Box = styled.div`
   width: 60px;
   height: 30px;
   border-radius: 20px;
-  background-color: ${({ theme }) => theme.color.background};
+  background-color: ${({ theme }) => theme.color.backgroundPrimary};
   border: 2px solid ${({ theme }) => theme.color.textPrimary};
   display: flex;
   justify-content: space-around;
@@ -46,7 +46,7 @@ export const DarkIcon = styled(FaMoon)`
 `;
 
 export const PointerIcon = styled(FaPaw)<PointerIconProps>`
-  color: ${({ theme }) => theme.color.background};
+  color: ${({ theme }) => theme.color.backgroundPrimary};
   font-size: 36px;
   padding: 6px;
   background-color: ${({ theme }) => theme.color.backgroundPrimary};
