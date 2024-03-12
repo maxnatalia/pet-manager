@@ -1,30 +1,59 @@
-# React + TypeScript + Vite
+# 🐾Pet Manager:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is my new app - Pet Manager - here you can manage your all domestic pets.
 
-Currently, two official plugins are available:
+## 📌Demo:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Feel free to see it!
 
-## Expanding the ESLint configuration
+[Pet Manager](https://maxnatalia.github.io/pet-manager/)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 📌General Information
 
-- Configure the top-level `parserOptions` property like this:
+Welcome to Pet Manager, your go-to application for managing and organizing information about your beloved pets. This comprehensive tool allows you to create and maintain individual profiles for each of your pets, schedule events, and stay on top of their well-being effortlessly.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+This responsive project was bootstrapped with **React + TypeScript + Vite**, using Local Storage.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### 📎Features
+
+#### 📌 Theme Switcher
+
+You can choose between dark and light mode and save your choice in local storage.
+
+#### 📌 Create Your Own Pet List
+
+Easily generate a personalized list of your pets by filling out a simple form with specific details about each furry friend. Keep track of their essential information, such as breed, date of birth and more.
+
+#### 📌 Schedule Custom Events
+
+Plan and organize events tailored to each pet's needs. Whether it's a veterinary appointment, grooming session, or trainee Pet Care Manager lets you schedule events with ease. Filter and search through events for convenient management.
+
+#### 📌 User-Friendly Dashboard
+
+Enjoy a transparent and intuitive dashboard that provides a summarized overview of upcoming events and the pets you have added. Stay informed about your pets' schedules at a glance and ensure they receive the care they deserve.
+
+#### 📌 Local Storage
+
+Your data is important, and Pet Care Manager values your privacy. All your pet lists and event schedules are securely stored locally on your device, ensuring easy access and peace of mind.
+
+#### 📌 Individual Pet and Event Pages
+
+Dive into detailed profiles for each pet and event. Access specific information, edit details, and keep everything organized with dedicated pages for each entry.
+
+#### 📌 Easy Data Entry with Forms
+
+Efficiently input information about your pets and events using user-friendly forms. Streamlined data entry ensures that you can quickly add or update details without any hassle.
+
+## 🛠Used technologies:
+
+- [x] HTML
+- [x] CSS (Flex, Grid)
+- [x] JavaScript ES6+
+- [x] MediaQueries
+- [x] React
+- [x] React hooks - useContext, custom hooks
+- [x] Styled-components
+- [x] Error handling
+- [x] LocalStorage
+- [x] Vite
+- [x] TypeScript
