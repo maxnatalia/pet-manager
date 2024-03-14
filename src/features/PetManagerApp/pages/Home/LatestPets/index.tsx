@@ -1,19 +1,25 @@
 import { TitleBox } from "../../../../../common/TitleBox";
-import { mapPetsForCard } from "../../../utils";
+import ItemCard from "../../../../../common/ItemCard";
+import { getPetEmoji } from "../../../utils";
 import usePetsContext from "../../../usePetsContext";
 import { PetsBox } from "./styled";
-
-import Card from "../../../../../common/Card";
 
 const LatestPets = () => {
   const { petsList } = usePetsContext();
 
-  const mappedPetsList = mapPetsForCard(petsList);
-
   return (
     <PetsBox>
-      <TitleBox>Lastest added pets:</TitleBox>
-      <Card $column data={mappedPetsList} />
+      <TitleBox>🖇️ Lastest added pets:</TitleBox>
+      {petsList.map(item => (
+        <ItemCard
+          key={item.id}
+          avatar={getPetEmoji(item.category)}
+          name={item.petName}
+          subname={item.breed}
+          linkName="See more..."
+          linkAddress={`/pet/${item.id}`}
+        />
+      ))}
     </PetsBox>
   );
 };
