@@ -1,16 +1,18 @@
 import { ReactNode } from "react";
+import { GridPosition, StyledBlockBox, Title } from "./styled";
 
 type BlockBoxProps = {
   title: string;
   children: ReactNode;
+  $gridPosition?: GridPosition;
 };
 
-const BlockBox = ({ title, children }: BlockBoxProps) => {
+const BlockBox = ({ title, children, $gridPosition }: BlockBoxProps) => {
   return (
-    <div>
-      <h2>{title}</h2>
+    <StyledBlockBox $gridPosition={$gridPosition}>
+      <Title>{title}</Title>
       <div>{children}</div>
-    </div>
+    </StyledBlockBox>
   );
 };
 
