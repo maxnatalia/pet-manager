@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { CardAvatar, CardLink, StyledItemCard } from "./styled";
 
 interface ItemCardProps {
@@ -6,6 +7,7 @@ interface ItemCardProps {
   subname: string;
   linkAddress: string;
   linkName: string;
+  children?: ReactNode;
 }
 
 const ItemCard = ({
@@ -14,6 +16,7 @@ const ItemCard = ({
   subname,
   linkAddress,
   linkName,
+  children,
 }: ItemCardProps) => {
   return (
     <StyledItemCard>
@@ -23,6 +26,7 @@ const ItemCard = ({
         <div>{subname}</div>
       </div>
       <CardLink to={linkAddress}>{linkName}</CardLink>
+      <div>{children}</div>
     </StyledItemCard>
   );
 };
