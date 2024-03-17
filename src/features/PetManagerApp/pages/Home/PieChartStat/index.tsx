@@ -42,7 +42,7 @@ const PieChartStat = () => {
   ];
 
   return (
-    <PieChart width={300} height={260}>
+    <PieChart width={300} height={200}>
       <Pie
         data={dataPieChart}
         dataKey="value"
