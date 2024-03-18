@@ -7,6 +7,7 @@ interface ItemCardProps {
   subname: string;
   linkAddress: string;
   linkName: string;
+  title?: string;
   children?: ReactNode;
 }
 
@@ -17,9 +18,10 @@ const ItemCard = ({
   linkAddress,
   linkName,
   children,
+  title,
 }: ItemCardProps) => {
   return (
-    <StyledItemCard>
+    <StyledItemCard title={title}>
       <CardAvatar>{avatar}</CardAvatar>
       <div>
         <div>{name}</div>
