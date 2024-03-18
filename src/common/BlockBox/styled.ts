@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export type GridPosition = "latestPets" | "overview";
+export type GridPosition =
+  | "latestPets"
+  | "petsOverview"
+  | "today"
+  | "eventsInsights";
 
 export const StyledBlockBox = styled.div<{ $gridPosition?: GridPosition }>`
   grid-area: ${({ $gridPosition }) => $gridPosition};
