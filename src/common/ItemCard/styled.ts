@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const StyledItemCard = styled.div`
-  margin: 10px auto;
+  margin: 10px 0;
   padding: 8px 16px;
   border-bottom: 1px solid black;
   /* border-top: 1px solid black; */
