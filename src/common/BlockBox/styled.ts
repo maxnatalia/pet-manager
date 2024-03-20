@@ -23,7 +23,9 @@ export const Title = styled.h3`
 
 export const BlockContent = styled.div<BlockContentFlow>`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
 
   ${({ $direction }) =>
     $direction === "column" &&
