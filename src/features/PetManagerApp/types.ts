@@ -3,7 +3,7 @@ export type Pet = {
   petName: string;
   breed: string;
   category: PetCategory;
-  gender: string;
+  gender: PetGender;
   description: string;
   dateOfBirth: string;
   events: EventType[];
@@ -16,6 +16,8 @@ export type PetCategory =
   | "rabbit"
   | "parrot"
   | "rodent";
+
+export type PetGender = "unspecified" | "male" | "female";
 
 export type EventCategory =
   | "unspecified"
@@ -37,3 +39,9 @@ export type AllEvents = {
 } & EventType;
 
 export type ValidationFunction = (value: string) => boolean;
+
+export type CardDataEvent = {
+  events: AllEvents[];
+  countByCategory: { category: EventCategory; count: number }[];
+  tabName: string;
+};
