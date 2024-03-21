@@ -13,8 +13,9 @@ export const StyledControl = styled.div<StyledControlProps>`
   ${({ $panel }) =>
     $panel === "centerColumn" &&
     css`
+      padding: 20px;
+      min-width: 40%;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
     `}
 `;
