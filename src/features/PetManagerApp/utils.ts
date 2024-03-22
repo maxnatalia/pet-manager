@@ -1,4 +1,4 @@
-import { AllEvents, EventCategory, Pet, PetCategory } from "./types";
+import { AllEvents, EventCategory, Pet, PetCategory, PetGender } from "./types";
 
 export const isNotEmpty = (value: string): boolean =>
   value.trim() !== "" && value.trim().length >= 3;
@@ -25,6 +25,7 @@ export const isDateOfEventValid = (dateOfEvent: string): boolean => {
   return eventDate >= today;
 };
 
+export const petGender = ["unspecified", "male", "female"];
 export const petCategories = [
   "dog",
   "cat",
@@ -88,6 +89,19 @@ export const getPetEmoji = (animal: PetCategory) => {
   }
 };
 
+export const getGenderEmoji = (gender: PetGender) => {
+  switch (gender) {
+    case "unspecified":
+      return "❔";
+    case "male":
+      return "♂️";
+    case "female":
+      return "♀️";
+    default:
+      return "❔";
+  }
+};
+
 export const eventCategoryOptions = [
   { label: "❔ Unspecified", value: "unspecified" },
   { label: "🥼 Vet", value: "vet" },
@@ -110,3 +124,15 @@ export const getEventEmoji = (event: EventCategory) => {
       return "❔";
   }
 };
+
+export const formatDate = (date: Date) => {
+  return date.toLocaleString("en-US", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+};
+
+export const countPetsByCategory = (category: PetCategory, list: Pet[]) =>
+  list.filter(pet => pet.category === category).length;
