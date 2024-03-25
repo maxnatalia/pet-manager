@@ -32,6 +32,7 @@ export type EventType = {
   eventDate: string;
   eventCategory: EventCategory;
 };
+
 export type AllEvents = {
   petId: string;
   petName: string;
