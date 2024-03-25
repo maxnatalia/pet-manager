@@ -136,3 +136,14 @@ export const formatDate = (date: Date) => {
 
 export const countPetsByCategory = (category: PetCategory, list: Pet[]) =>
   list.filter(pet => pet.category === category).length;
+
+export const isDateEventExpired = (date: string): string => {
+  const currentDate = new Date();
+  const eventDate = new Date(date);
+
+  if (eventDate < currentDate) {
+    return "Po realizacji";
+  } else {
+    return "Przed realizacją";
+  }
+};
