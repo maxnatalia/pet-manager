@@ -4,7 +4,8 @@ import { Label, List, StyledNavLink, StyledNavigation } from "./styled";
 
 const Navigation = () => {
   const location = useLocation();
-  const shouldDisplayForm = location.pathname === "/form";
+  const shouldDisplayForm =
+    location.pathname === "/form" || location.pathname === "/eventForm";
 
   return (
     <>
@@ -14,12 +15,14 @@ const Navigation = () => {
             {navigationList.map(({ name, link, title, Icon }) => (
               <li key={link}>
                 <StyledNavLink
-                  $special={link === "/form"}
+                  $special={link === "/form" || link === "/eventForm"}
                   to={link}
                   title={title}
                 >
-                  <Icon $special={link === "/form"} />
-                  <Label $special={link === "/form"}>{name}</Label>
+                  <Icon $special={link === "/form" || link === "/eventForm"} />
+                  <Label $special={link === "/form" || link === "/eventForm"}>
+                    {name}
+                  </Label>
                 </StyledNavLink>
               </li>
             ))}
