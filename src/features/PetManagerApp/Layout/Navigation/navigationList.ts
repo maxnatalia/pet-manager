@@ -27,4 +27,10 @@ export const navigationList = [
     title: "Go to form",
     Icon: styledIcon(MdAddCircle),
   },
+  {
+    name: "Add Event",
+    link: "/eventForm",
+    title: "Go to form",
+    Icon: styledIcon(MdAddCircle),
+  },
 ];
