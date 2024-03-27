@@ -1,4 +1,11 @@
-import { AllEvents, EventCategory, Pet, PetCategory, PetGender } from "./types";
+import {
+  AllEvents,
+  EventCategory,
+  EventType,
+  Pet,
+  PetCategory,
+  PetGender,
+} from "./types";
 
 export const isNotEmpty = (value: string): boolean =>
   value.trim() !== "" && value.trim().length >= 3;
@@ -109,6 +116,27 @@ export const eventCategoryOptions = [
   { label: "🥇 Show", value: "show" },
   { label: "🎓 Training", value: "training" },
 ];
+
+export const eventPetOptions = (petsList: Pet[]) => {
+  return petsList.map(pet => ({
+    label: `${getPetEmoji(pet.category)} - ${pet.petName}`,
+    value: pet.petName,
+    id: pet.id,
+  }));
+};
+
+export const findEventById = (
+  petsList: Pet[],
+  eventId: string
+): EventType | null => {
+  for (const pet of petsList) {
+    const foundEvent = pet.events.find(event => event.eventId === eventId);
+    if (foundEvent) {
+      return foundEvent;
+    }
+  }
+  return null;
+};
 
 export const getEventEmoji = (event: EventCategory) => {
   switch (event) {
