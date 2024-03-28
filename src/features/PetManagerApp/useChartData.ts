@@ -45,5 +45,14 @@ export const useChartData = (
     },
   ];
 
-  return dataPieChart === "petsByCategory" ? dataPetsByCategory : undefined;
+  const eventsByCategory = [
+    { id: "1", name: "Groomer", value: 2 },
+    { id: "2", name: "Vet", value: 2 },
+    { id: "3", name: "Show", value: 2 },
+    { id: "4", name: "Training", value: 2 },
+  ];
+
+  return dataPieChart === "petsByCategory"
+    ? dataPetsByCategory
+    : eventsByCategory;
 };
